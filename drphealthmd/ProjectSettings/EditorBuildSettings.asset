@@ -5,28 +5,31 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SignIn.unity
     guid: af63253d1b9d5454fb85b99a59dbb01b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Intro.unity
     guid: 84cb31049150bb444aee0e84ebe1151d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Home.unity
     guid: 3aa06aca640971246ac09abb8ec9de23
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ExperienceSelection.unity
     guid: ad5b46d7ad049f949919062474a04f0a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SelectGame.unity
     guid: 1a1b87e92a464cb45beaa15e7c003671
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/PlayerProfile.unity
     guid: b60d9401a0daf194abe21b881c5510c2
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/AR.unity
     guid: b681ba3f8a753af4dbc8c7d1e37ecfef
   - enabled: 0
     path: Assets/Scenes/Info.unity
     guid: 4c9ccc47d2b4b234fa4a15cc55b56333
+  - enabled: 1
+    path: Assets/Scenes/TestPlaneDetection.unity
+    guid: 3be58acb645bb2d40882b9e21ee67134
   m_configObjects: {}
