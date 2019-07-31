@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>513730563880-b1ghbbq16bo0v7e740mlkj957qupoi6v.apps.googleusercontent.com</string>
+	<string>153417098895-410l3a1uasii2q3r06b4f07nc1128gj4.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.513730563880-b1ghbbq16bo0v7e740mlkj957qupoi6v</string>
+	<string>com.googleusercontent.apps.153417098895-410l3a1uasii2q3r06b4f07nc1128gj4</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCigrsn9Ws8mnZRhHOwCtobEr3Vgf_oySI</string>
+	<string>AIzaSyCPXZrvvl72KnJi1xMXmvRhYg5L92GUHS4</string>
 	<key>GCM_SENDER_ID</key>
-	<string>513730563880</string>
+	<string>153417098895</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.firebase.ios</string>
+	<string>com.drphealthmdapp.demo</string>
 	<key>PROJECT_ID</key>
-	<string>go-health-kids-ar</string>
+	<string>go-health-kids</string>
 	<key>STORAGE_BUCKET</key>
-	<string>go-health-kids-ar.appspot.com</string>
+	<string>go-health-kids.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:513730563880:ios:12e59ecf51e76e6d</string>
+	<string>1:153417098895:ios:fce281094db9f760</string>
 	<key>DATABASE_URL</key>
-	<string>https://go-health-kids-ar.firebaseio.com</string>
+	<string>https://go-health-kids.firebaseio.com</string>
 </dict>
 </plist>
