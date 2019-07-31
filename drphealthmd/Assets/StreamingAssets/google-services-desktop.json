@@ -1,0 +1,37 @@
+{
+  "client": [
+    {
+      "services": {
+        "appinvite_service": {
+          "status": 1
+        }, 
+        "analytics_service": {
+          "status": 0
+        }
+      }, 
+      "oauth_client": [
+        {
+          "client_id": "513730563880-b1ghbbq16bo0v7e740mlkj957qupoi6v.apps.googleusercontent.com"
+        }
+      ], 
+      "api_key": [
+        {
+          "current_key": "AIzaSyCigrsn9Ws8mnZRhHOwCtobEr3Vgf_oySI"
+        }
+      ], 
+      "client_info": {
+        "mobilesdk_app_id": "1:513730563880:ios:12e59ecf51e76e6d", 
+        "android_client_info": {
+          "package_name": "com.firebase.ios"
+        }
+      }
+    }
+  ], 
+  "configuration_version": "1", 
+  "project_info": {
+    "storage_bucket": "go-health-kids-ar.appspot.com", 
+    "project_id": "go-health-kids-ar", 
+    "firebase_url": "https://go-health-kids-ar.firebaseio.com", 
+    "project_number": "513730563880"
+  }
+}

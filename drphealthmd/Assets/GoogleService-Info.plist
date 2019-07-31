@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>513730563880-b1ghbbq16bo0v7e740mlkj957qupoi6v.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.513730563880-b1ghbbq16bo0v7e740mlkj957qupoi6v</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCigrsn9Ws8mnZRhHOwCtobEr3Vgf_oySI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>513730563880</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.firebase.ios</string>
+	<key>PROJECT_ID</key>
+	<string>go-health-kids-ar</string>
+	<key>STORAGE_BUCKET</key>
+	<string>go-health-kids-ar.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:513730563880:ios:12e59ecf51e76e6d</string>
+	<key>DATABASE_URL</key>
+	<string>https://go-health-kids-ar.firebaseio.com</string>
+</dict>
+</plist>
