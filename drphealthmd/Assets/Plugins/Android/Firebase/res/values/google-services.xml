@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources tools:keep="@string/firebase_database_url,@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_web_client_id" xmlns:tools="http://schemas.android.com/tools">
+  <string name="firebase_database_url" translatable="false">https://go-health-kids.firebaseio.com</string>
+  <string name="gcm_defaultSenderId" translatable="false">153417098895</string>
+  <string name="google_storage_bucket" translatable="false">go-health-kids.appspot.com</string>
+  <string name="project_id" translatable="false">go-health-kids</string>
+  <string name="google_api_key" translatable="false">AIzaSyB44oQjXJJcYRQrHegiwRi7-dhbI5KCnfQ</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyB44oQjXJJcYRQrHegiwRi7-dhbI5KCnfQ</string>
+  <string name="google_app_id" translatable="false">1:153417098895:android:fce281094db9f760</string>
+  <string name="default_web_client_id" translatable="false">153417098895-v6kkecp8u2mu0nt5cklam6bljll82cdl.apps.googleusercontent.com</string>
+</resources>
