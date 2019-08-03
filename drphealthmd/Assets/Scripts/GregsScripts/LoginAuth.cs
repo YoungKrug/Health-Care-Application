@@ -28,7 +28,7 @@ public class LoginAuth : MonoBehaviour
             databaseReference.Database.GoOnline();
             User user = new User(userName.text, password.text);
             string key = databaseReference.Child("scores").Push().Key;
-           /* LeaderBoardEntry entry = new LeaderBoardEntry(userId, score);
+          /*  LeaderBoardEntry entry = new LeaderBoardEntry(userId, score);
             Dictionary<string, Object> allUsers = user.ToDictionary();
 
             Dictionary<string, Object> childUpdates = new Dictionary<string, Object>();
