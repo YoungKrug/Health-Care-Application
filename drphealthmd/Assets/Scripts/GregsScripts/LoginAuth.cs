@@ -7,6 +7,7 @@ using Firebase.Unity;
 using Firebase.Unity.Editor;
 using Firebase.Auth;
 using Firebase.Database;
+using Proyecto26;
 
 public class LoginAuth : MonoBehaviour
 {
@@ -27,21 +28,39 @@ public class LoginAuth : MonoBehaviour
         {
             databaseReference.Database.GoOnline();
             User user = new User(userName.text, password.text);
-            string key = databaseReference.Child("scores").Push().Key;
-          /*  LeaderBoardEntry entry = new LeaderBoardEntry(userId, score);
-            Dictionary<string, Object> allUsers = user.ToDictionary();
+          //  string json = JsonUtility.ToJson(user);
 
-            Dictionary<string, Object> childUpdates = new Dictionary<string, Object>();
-            childUpdates["/scores/" + key] = entryValues;
-            childUpdates["/user-scores/" + userId + "/" + key] = entryValues;
+           // databaseReference.Child("users").Child("0").SetRawJsonValueAsync(json);
+           // RestClient.Put("https://go-health--kids.firebaseio.com/.json", user);
+            string key = databaseReference.Child("users").Push().Key;
+            //LeaderBoardEntry entry = new LeaderBoardEntry(userId, score);
+            Dictionary<string, object> allUsers = user.ToDictionary();
 
-            mDatabase.UpdateChildrenAsync(childUpdates);*/
+            Dictionary<string, object> childUpdates = new Dictionary<string, object>();
+            childUpdates["/Users/" + key] = allUsers;
+            childUpdates["/user-password/" + 0 + "/" + key] = allUsers;
+            databaseReference.UpdateChildrenAsync(childUpdates);
+            GetInformation();
         }
         catch
         {
             Debug.Log("Couldnt Connect");
         }
         databaseReference.Database.GoOffline();
+    }
+    public void GetInformation()
+    {
+        FirebaseDatabase.DefaultInstance.GetReference("Users").ValueChanged += LoginAuth_ValueChanged;
+    }
+
+    private void LoginAuth_ValueChanged(object sender, ValueChangedEventArgs args)
+    {
+        if (args.DatabaseError != null)
+        {
+            Debug.LogError(args.DatabaseError.Message);
+            return;
+        }
+        Debug.Log(args.Snapshot);
     }
 }
 public class User
@@ -53,14 +72,12 @@ public class User
     }
     public string name;
     public string password;
-    public Dictionary<string, Object> ToDictionary()
+    public Dictionary<string, object> ToDictionary()
     {
-        Dictionary<string, Object> result = new Dictionary<string, Object>();
-        //result["name"] = name;
-        //result["score"] = score;
-
+        Dictionary<string, object> result = new Dictionary<string, object>();
+        result["name"] = name;
+        result["password"] = password;
         return result;
     }
-
 }
 
