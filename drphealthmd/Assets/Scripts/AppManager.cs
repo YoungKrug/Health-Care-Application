@@ -19,6 +19,6 @@ public class AppManager : MonoBehaviour {
     public void LoadScene(int scene)
     {
         audio.Play();
-        SceneManager.LoadScene(scene);
+        SceneManager.LoadScene("Login");
     }
 }
