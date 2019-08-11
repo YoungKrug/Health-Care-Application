@@ -20,6 +20,7 @@ public class LoginAuth : MonoBehaviour
     {
         FirebaseAuth.DefaultInstance.App.SetEditorDatabaseUrl("https://go-health-kids.firebaseio.com/");
         databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
+        GetInformation();
 
     }
     public void OnSubmit()
@@ -60,7 +61,45 @@ public class LoginAuth : MonoBehaviour
             Debug.LogError(args.DatabaseError.Message);
             return;
         }
-        Debug.Log(args.Snapshot);
+        //string key = args.Snapshot.Key;
+        string info = args.Snapshot.GetRawJsonValue();
+        string info2 = args.Snapshot.GetRawJsonValue();
+        int count = (int)args.Snapshot.ChildrenCount;
+        User[] allUsers = GetInformationFromJson(info, info2, count);
+      //  Debug.Log(args.Snapshot.Value);
+      //  Debug.Log(args.Snapshot);
+    }
+    User[] GetInformationFromJson(string s, string b, int length)
+    {
+        List<User> userInfo = new List<User>();
+        int incrememnt = 0;
+        //int incrememntTwo = 1;
+        for (int i = 0; i < length; i++)
+        {
+            string value = s.Substring(s.IndexOf("name") + "name".Length + incrememnt);
+            s = s.Substring(s.IndexOf("name") + "name".Length + incrememnt);
+            string valueTwo = b.Substring(b.IndexOf("password") + "password".Length + incrememnt);
+            b = b.Substring(b.IndexOf("password") + "password".Length + incrememnt);
+            if (value.Contains(","))
+            {
+                //Debug.Log(valueTwo.IndexOf(","));
+                value = value.Remove(value.IndexOf(","));
+                if(i == length-1)
+                    valueTwo = valueTwo.Remove(valueTwo.IndexOf("}"));
+                else
+                    valueTwo = valueTwo.Remove(valueTwo.IndexOf(","));
+            }
+            
+            Debug.Log(value + " : " + valueTwo);
+            string userName = "";
+            string password = "";
+            User temp = new User(userName, password);                                                         
+            //incrememnt += 
+           // incrememnt += (s.IndexOf("name") + "name".Length + incrememnt);
+           // incrememntTwo += (b.IndexOf("name") + "name".Length + incrememntTwo);
+            
+        }
+        return userInfo.ToArray();
     }
 }
 public class User
