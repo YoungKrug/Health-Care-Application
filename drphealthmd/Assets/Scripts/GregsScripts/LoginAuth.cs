@@ -16,13 +16,15 @@ public class LoginAuth : MonoBehaviour
     public GameObject loginDataBaseHolder;
     public Text userName;
     public Text password;
-    public GameObject passwordInputField;
+    public Text usernameWarning;
+    public Text signUpSuccessful;
     private UnityEngine.Random random = new UnityEngine.Random();
     DatabaseReference databaseReference;
     User[] currentUsers;
     // Start is called before the first frame update
     void Start()
     {
+        //Connects to the database
         FirebaseAuth.DefaultInstance.App.SetEditorDatabaseUrl("https://go-health-kids.firebaseio.com/");
         databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
         GetInformation();
@@ -30,29 +32,47 @@ public class LoginAuth : MonoBehaviour
     }
     public void OnSignUp()
     {
-        if (retypePassword.GetComponent<InputField>().text != "" && password.GetComponentInParent<InputField>().text == retypePassword.GetComponent<InputField>().text)
+        //Grabbing the username and passwords
+        string pass = retypePassword.GetComponent<InputField>().text;
+        string usernameInfo = userName.text;
+        //Making sure the password has not been used before creating the account
+        if (pass != "" && password.GetComponentInParent<InputField>().text == pass)
         {
-            try
+            if (!loginDataBaseHolder.GetComponent<LoginInformation>().CheckForValidUsername(new User(usernameInfo, pass)))
             {
-                databaseReference.Database.GoOnline();
-                User user = new User(userName.text, retypePassword.GetComponent<InputField>().text);
-                string key = databaseReference.Child("users").Push().Key;
-                Dictionary<string, object> allUsers = user.ToDictionary();
-                Dictionary<string, object> childUpdates = new Dictionary<string, object>();
-                childUpdates["/Users/" + key] = allUsers;
-                //childUpdates["/user-pass/" + "/" + key] = allUsers;
-                databaseReference.UpdateChildrenAsync(childUpdates);
+                try
+                {
+                    //Connecting to the database and sending it the new information
+                    databaseReference.Database.GoOnline();
+                    User user = new User(userName.text, retypePassword.GetComponent<InputField>().text);
+                    //The unique identifier * Plan to make it an id in the future
+                    string key = databaseReference.Child("users").Push().Key;
+                    Dictionary<string, object> allUsers = user.ToDictionary();
+                    Dictionary<string, object> childUpdates = new Dictionary<string, object>();
+                    childUpdates["/Users/" + key] = allUsers;
+                    //childUpdates["/user-pass/" + "/" + key] = allUsers;
+                    databaseReference.UpdateChildrenAsync(childUpdates);
+                    //Recalulate the information
+                    //loginDataBaseHolder.GetComponent<LoginInformation>().AddToLoginInformation(user);
+                    usernameWarning.GetComponentInParent<InputField>().text = "";
+                    signUpSuccessful.GetComponentInParent<InputField>().text = " You have created an account";
+                    GetInformation();
+                }
+                catch
+                {
+                    //Debug.Log("Couldnt Connect");
+                }
             }
-            catch
+            else
             {
-                Debug.Log("Couldnt Connect");
+                //Debug.Log("Passwords and retype password must match or the username is already taken");
+                //Warnings to people depending on if there user name info or password info is wrong
+                signUpSuccessful.GetComponentInParent<InputField>().text = "";
+                usernameWarning.GetComponentInParent<InputField>().text = "Username is taken please use a different one";
             }
         }
-        else
-        {
-            //Send message
-            Debug.Log("Passwords and retype password must match");
-        }
+        
+       
     }
     public void OnSignIn()
     {
@@ -63,9 +83,11 @@ public class LoginAuth : MonoBehaviour
             loginDataBaseHolder.GetComponent<LoginInformation>().AddToLoginInformation(userName.text, password.GetComponentInParent<InputField>().text);
             SceneManager.LoadScene(1);
         }
+        usernameWarning.GetComponentInParent<InputField>().text = "Information does not match or it is wrong";
     }
     public void GetInformation()
     {
+        //Grabs the information from the database
         FirebaseDatabase.DefaultInstance.GetReference("Users").ValueChanged += LoginAuth_ValueChanged;
     }
 
@@ -76,6 +98,7 @@ public class LoginAuth : MonoBehaviour
             Debug.LogError(args.DatabaseError.Message);
             return;
         }
+        //args.Snapshot is where we are able to see the information and grab it
         //string key = args.Snapshot.Key;
         string info = args.Snapshot.GetRawJsonValue();
         string info2 = args.Snapshot.GetRawJsonValue();
@@ -111,8 +134,11 @@ public class LoginAuth : MonoBehaviour
             valuePassword = RemoveNonLettersFromString(valuePassword);
             // Going to create a information Handler for the information
             User temp = new User(valueName, valuePassword);
-            userInfo.Add(temp);
-            loginDataBaseHolder.GetComponent<LoginInformation>().AddToLoginInformation(temp);
+            if (!loginDataBaseHolder.GetComponent<LoginInformation>().CheckIfLoginIsInDatabase(temp))
+            {
+                userInfo.Add(temp);
+                loginDataBaseHolder.GetComponent<LoginInformation>().AddToLoginInformation(temp);
+            }
             Debug.Log(temp.name + "  " + temp.password);
         }
         return userInfo.ToArray();
@@ -122,7 +148,7 @@ public class LoginAuth : MonoBehaviour
         string newVal = "";
         for (int i = 0; i < s.Length; i++)
         {
-            if (Char.IsLetter(s[i]))
+            if (Char.IsLetterOrDigit(s[i]))
             {
                 newVal += s[i];
             }

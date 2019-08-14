@@ -27,4 +27,26 @@ public class LoginInformation : MonoBehaviour
         }
         return false;
     }
+    public bool CheckForValidUsername(User u)
+    {
+        for (int i = 0; i < usersInformation.Count; i++)
+        {
+            if (u.name == usersInformation[i].name)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public bool CheckForValidUsername(string u)
+    {
+        for (int i = 0; i < usersInformation.Count; i++)
+        {
+            if (u == usersInformation[i].name)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

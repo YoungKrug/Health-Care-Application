@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SignUp_Login : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class SignUp_Login : MonoBehaviour
     public GameObject signUpButton;
     public GameObject submitButton;
     public GameObject login;
+    public GameObject usernameWarning;
+    public GameObject signUpSuccess;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +26,8 @@ public class SignUp_Login : MonoBehaviour
 
     public void Toggle()
     {
+        signUpSuccess.GetComponentInParent<InputField>().text = "";
+        usernameWarning.GetComponentInParent<InputField>().text = "";
         submitButton.SetActive(false);
         signUpButton.SetActive(true);
         retype.SetActive(true);
@@ -32,6 +37,8 @@ public class SignUp_Login : MonoBehaviour
 
     public void BackToLogin()
     {
+        signUpSuccess.GetComponentInParent<InputField>().text = "";
+        usernameWarning.GetComponentInParent<InputField>().text = "";
         submitButton.SetActive(true);
         signUpButton.SetActive(false);
         retype.SetActive(false);
