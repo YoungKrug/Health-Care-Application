@@ -68,6 +68,7 @@ public class GameController : MonoBehaviour
         //text.text = touches.ToString();
         //image.gameObject.SetActive(true);
     }
+    //Checks if the player has placed the object
     void CheckIfObjectHasBeenPlaced()
     {
         if (GameObject.FindObjectOfType(typeof(DontMove)))
@@ -85,6 +86,7 @@ public class GameController : MonoBehaviour
     }
     void PlayScenario()
     {
+        //Plays the timeline squences
         if(scenario <= 1)
         {
             SetListEqualToTrue(timeLineOneObjects);
