@@ -27,8 +27,8 @@ Material:
     - _Amount: 1
     - _Amplitude: 450.9
     - _CutoutThresh: 0.1
-    - _Distance: 2109.1
-    - _Speed: 90.5
+    - _Distance: 2000
+    - _Speed: 3
     - _Transparency: 0.8
     m_Colors:
     - _TintColor: {r: 0.103773594, g: 0, b: 0, a: 1}
