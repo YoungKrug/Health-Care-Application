@@ -6,7 +6,32 @@ ModelImporter:
   - first:
       74: -203655887218126122
     second: mixamo.com
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bodymat
+    second: {fileID: 2100000, guid: e6cf64d0386b5d64197c84179bf7e75f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bottommat
+    second: {fileID: 2100000, guid: 6a32a4c74a70b914aaf53d5ce59c4b00, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hairmat
+    second: {fileID: 2100000, guid: 823b0f5c3766eca4c8a4132192693c62, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shoesmat
+    second: {fileID: 2100000, guid: 5449ffa2bdaf385428e821ae1bfdb8bb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Topmat
+    second: {fileID: 2100000, guid: e7f5015bceb67da4a81858dd0fdfd5c4, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -98,13 +123,7 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips:
-  - 5b36374b0274a824cb78300345ec5792
-  - ff0d59976bdf7ba44a003edaa1982ed8
-  - 9ee96e4f8e0ced941ac5a79714f03d10
-  - 27b00a4a683d25f479cb4f0b74491fc9
-  - 0007f173000e40343989e4a7c5b660be
-  - 894aada6167d9aa40b4f9d8d0bddc84c
+  referencedClips: []
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
