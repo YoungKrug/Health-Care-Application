@@ -63,10 +63,11 @@ public class GameController : MonoBehaviour
         //We know the player has given input, but we have to ensure he wants to use this location
         // int touches = 0;      
         
-        if(isWaitingForPlayerInput && numberOfTouches > 0 && placer.GetComponent<DefaultTrackableEventHandler>().checkIfTracking)
+        if(isWaitingForPlayerInput && numberOfTouches> 0 && placer.GetComponent<DefaultTrackableEventHandler>().checkIfTracking)
             CheckIfObjectHasBeenPlaced();
         DebugText();
         numberOfTouches += Input.touches.Length;
+        numberOfTouches += Input.touchCount;
     }
     //Checks if the player has placed the object
     void CheckIfObjectHasBeenPlaced()
@@ -104,7 +105,8 @@ public class GameController : MonoBehaviour
     }
     void DebugText()
     {
-        debug.text = placer.GetComponent<DefaultTrackableEventHandler>().checkIfTracking.ToString() + '\n' + Input.touchCount.ToString() + "  " + timeLines[scenario].activeSelf + "    " + numberOfTouches;
+        debug.text = placer.GetComponent<DefaultTrackableEventHandler>().checkIfTracking.ToString() + '\n' + Input.touchCount.ToString() + "  " + timeLines[scenario].activeSelf + "\n" + numberOfTouches +
+            "\n" + isWaitingForPlayerInput;
     }
 
 }
