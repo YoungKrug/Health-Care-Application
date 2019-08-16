@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Timeline;
-
+using UnityEngine.EventSystems;
 
 public class GameController : MonoBehaviour
 {
@@ -21,6 +21,7 @@ public class GameController : MonoBehaviour
     public Text text;
     public Text debug;
     public bool isWaitingForPlayerInput = true;
+    int numberOfTouches = 0;
     int scenario = 0;
     
     void Start()
@@ -60,17 +61,18 @@ public class GameController : MonoBehaviour
 
         }
         //We know the player has given input, but we have to ensure he wants to use this location
-       // int touches = 0;
-        if(isWaitingForPlayerInput && Input.touchCount >= 1 && placer.GetComponent<DefaultTrackableEventHandler>().checkIfTracking)
+        // int touches = 0;      
+        
+        if(isWaitingForPlayerInput && numberOfTouches> 0 && placer.GetComponent<DefaultTrackableEventHandler>().checkIfTracking)
             CheckIfObjectHasBeenPlaced();
-        debug.text = placer.GetComponent<DefaultTrackableEventHandler>().checkIfTracking.ToString() + '\n' + Input.touchCount.ToString() +"  " + timeLines[scenario].activeSelf;
-       // text.gameObject.SetActive(true);
-        //text.text = touches.ToString();
-        //image.gameObject.SetActive(true);
+        DebugText();
+        numberOfTouches += Input.touches.Length;
+        numberOfTouches += Input.touchCount;
     }
     //Checks if the player has placed the object
     void CheckIfObjectHasBeenPlaced()
     {
+        numberOfTouches = 0;
         if (GameObject.FindObjectOfType(typeof(DontMove)))
         {
             //Object has been placed
@@ -101,4 +103,10 @@ public class GameController : MonoBehaviour
             g.SetActive(true);
         }
     }
+    void DebugText()
+    {
+        debug.text = placer.GetComponent<DefaultTrackableEventHandler>().checkIfTracking.ToString() + '\n' + Input.touchCount.ToString() + "  " + timeLines[scenario].activeSelf + "\n" + numberOfTouches +
+            "\n" + isWaitingForPlayerInput;
+    }
+
 }
