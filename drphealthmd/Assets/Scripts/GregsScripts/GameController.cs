@@ -23,8 +23,9 @@ public class GameController : MonoBehaviour
     public bool isWaitingForPlayerInput = true;
     int numberOfTouches = 0;
     int scenario = 0;
+    bool isDoingFirstScenario = false;
     
-    void Start()
+    void Awake()
     {
         image.gameObject.SetActive(false);
         text.gameObject.SetActive(false);
@@ -34,8 +35,9 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!isWaitingForPlayerInput)
+        if(!isWaitingForPlayerInput && !isDoingFirstScenario)
         {
+            isDoingFirstScenario = true;
             // Play area
             DontMove[] objs = GameObject.FindObjectsOfType(typeof(DontMove)) as DontMove[];
             for (int i = 0; i < objs.Length; i++)
@@ -105,7 +107,7 @@ public class GameController : MonoBehaviour
     }
     void DebugText()
     {
-        debug.text = placer.GetComponent<DefaultTrackableEventHandler>().checkIfTracking.ToString() + '\n' + Input.touchCount.ToString() + "  " + timeLines[scenario].activeSelf + "\n" + numberOfTouches +
+        debug.text = placer.GetComponent<DefaultTrackableEventHandler>().checkIfTracking.ToString() + '\n' + Input.touchCount.ToString() + "  " + "\n Number of touches: " + numberOfTouches +
             "\n" + isWaitingForPlayerInput;
     }
 
