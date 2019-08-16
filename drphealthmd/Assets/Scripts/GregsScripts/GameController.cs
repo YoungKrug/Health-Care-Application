@@ -24,6 +24,7 @@ public class GameController : MonoBehaviour
     int numberOfTouches = 0;
     int scenario = 0;
     bool isDoingFirstScenario = false;
+    bool cardHasBeenPlaced;
     
     void Awake()
     {
@@ -109,6 +110,25 @@ public class GameController : MonoBehaviour
     {
         debug.text = placer.GetComponent<DefaultTrackableEventHandler>().checkIfTracking.ToString() + '\n' + Input.touchCount.ToString() + "  " + "\n Number of touches: " + numberOfTouches +
             "\n" + isWaitingForPlayerInput;
+    }
+    void FlipCardScenario()
+    {
+        //Once certain prereqs have been fullfilled
+        button.gameObject.SetActive(true);
+        text.gameObject.SetActive(true);
+        image.gameObject.SetActive(true);
+        text.text = "Flip a card and place it on the area";
+    }
+    void CardHasBeenPlaced()
+    {
+        GameObject[] characters = GameObject.FindGameObjectsWithTag("Cards");
+        foreach(GameObject g in characters)
+        {
+            //The exercise it playing
+            // We will then bring up the recording canvas and have the player do pushups and have them click a button when done
+            // Then the Other timeline stuff will happen
+            g.GetComponent<DefaultTrackableEventHandler>().checkIfTracking = true;
+        }
     }
 
 }
