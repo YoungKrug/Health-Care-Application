@@ -9,7 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Boy01_Body_MAT
   m_Shader: {fileID: 4800000, guid: 89448acf9e2007240951575cbd195513, type: 3}
-  m_ShaderKeywords: _NORMALMAP
+  m_ShaderKeywords: _DIST_CHROM_ON _GLITCHCOLOR_ON _MASK_TYPE_ON _MONOCHROM_ON _NORMALMAP
+    _X_ON _Y_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -35,8 +36,16 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Diffuse:
+        m_Texture: {fileID: 2800000, guid: 717bf66d48206314ba7e5d53bda54180, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _M_map:
+        m_Texture: {fileID: 2800000, guid: 717bf66d48206314ba7e5d53bda54180, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -47,6 +56,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _N_map:
+        m_Texture: {fileID: 2800000, guid: 717bf66d48206314ba7e5d53bda54180, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -55,14 +68,20 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _originalDiffuse:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Amount: 0.48
-    - _Amplitude: 450
+    - _Amount: 0.211
+    - _Amplitude: 549.56
+    - _Bias: 0
     - _BumpScale: 1
+    - _Circle_wave: 51.3
     - _Cutoff: 0.5
     - _CutoutThresh: 0.1
     - _DetailNormalMapScale: 1
-    - _Distance: 2000
+    - _Distance: 8287
     - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0
@@ -70,15 +89,39 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _Opacity: 1
+    - _OriginalUVSwitch: 0
+    - _OrigineX: 0.471
+    - _OrigineY: 0.447
     - _Parallax: 0.02
+    - _Power: 3
+    - _Rotation: 0
+    - _Scale: 3.99
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _Speed: -70.2
+    - _Speed: 5.44
+    - _Speed_Up: 0
+    - _Speed_face: 1
+    - _Speed_wave: 0
     - _SrcBlend: 1
     - _Transparency: 1
     - _UVSec: 0
+    - _X: 1
+    - _Y: 1
     - _ZWrite: 1
+    - _Zoom: 1
+    - _cut_level: 2.83
+    - _deform: 0.87
+    - _dist_chrom: 1
+    - _glitchColor: 1
+    - _intensity: 1.01
+    - _mask_type: 1
+    - _monochrom: 1
+    - _noise_details: 2.3
+    - _t: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.24528301, g: 0.22561409, b: 0.22561409, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _TintColor: {r: 0, g: 0, b: 0, a: 1}
+    - _diff_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _glitchColor_c: {r: 1, g: 1, b: 1, a: 1}
