@@ -52,7 +52,8 @@
             v2f vert (appdata v)
             {
                 v2f o;
-				v.vertex.x += 1/(tan(_Time.y * _Speed + v.vertex.y * _Amplitude) * _Distance * _Amount);
+				//v.vertex.x += 1/(tan(_Time.y * _Speed + v.vertex.y * _Amplitude) * _Distance * _Amount);
+				v.vertex.x += (sin(_Time.y * _Speed + v.vertex.y * _Amplitude) * _Distance * _Amount);
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 return o;

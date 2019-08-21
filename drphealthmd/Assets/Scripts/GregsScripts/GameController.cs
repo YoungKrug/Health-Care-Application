@@ -13,7 +13,10 @@ public class GameController : MonoBehaviour
     public List<GameObject> playArea;
     public List<GameObject> timeLines;
     public List<GameObject> timeLineOneObjects;
-    public GameObject[] timeLineTwoObjects;
+    public List<GameObject> timeLineTwoObjects;
+    public List<GameObject> timeLineThreeObjects; // Code for a way to make this all work after a certain prereq has be fullfilled
+    public List<GameObject> timeLineFourObjects;
+    public List<GameObject> timeLineFiveObjects;
     public GameObject placer;
     public GameObject planeFinder;
     public GameObject objectToSpawnOnCard;
@@ -30,7 +33,7 @@ public class GameController : MonoBehaviour
     bool isDoingFirstScenario = false;
     bool cardHasBeenPlaced;
     bool isDone;
-    
+    // Since we are not doing the card flip we need to change up how we say it
     void Awake()
     {
        
@@ -40,7 +43,7 @@ public class GameController : MonoBehaviour
     }
     private void Start()
     {
-        for (int i = 0; i < timeLineTwoObjects.Length; i++)
+        for (int i = 0; i < timeLineTwoObjects.Count; i++)
         {
             timeLineTwoObjects[i].SetActive(false);
         }
@@ -53,11 +56,11 @@ public class GameController : MonoBehaviour
         if (!isWaitingForPlayerInput && !isDone)
         {
             isDoingFirstScenario = true;
-            if(scenario == 2 && !isQuestionTime) // continue
+            if(scenario == 3 && !isQuestionTime) // continue
             {
                 CardHasBeenPlaced();
             }
-            if(scenario != 2)
+            if(scenario != 3)
                 HandleScenarioInformation();
         }
         //We know the player has given input, but we have to ensure he wants to use this location
@@ -72,13 +75,14 @@ public class GameController : MonoBehaviour
     //Checks if the player has placed the object
     void HandleScenarioInformation()
     {
-        DontMove[] objs = GameObject.FindObjectsOfType(typeof(DontMove)) as DontMove[];
-        if(scenario == 0)
-        for (int i = 0; i < objs.Length; i++)
+        if (scenario == 0)
         {
-            playArea.Add(objs[i].gameObject);
+            DontMove[] objs = GameObject.FindObjectsOfType(typeof(DontMove)) as DontMove[];
+            for (int i = 0; i < objs.Length; i++)
+            {
+                playArea.Add(objs[i].gameObject);
+            }
         }
-
         button.gameObject.SetActive(false);
         text.gameObject.SetActive(false);
         image.gameObject.SetActive(false);
@@ -120,11 +124,30 @@ public class GameController : MonoBehaviour
         }
         if(scenario == 1)
         {
+            SetListEqualToFalse(timeLineOneObjects);
+            SetListEqualToTrue(timeLineTwoObjects);
+            StartCoroutine(Wait());
+            timeLines[scenario - 1].SetActive(true);
+            timeLines[scenario].SetActive(true);
+            //timeLines[scenario].SetActive(true);
+            // return;
+        }
+        if (scenario == 2)
+        {
+            SetListEqualToFalse(timeLineTwoObjects);
+            SetListEqualToTrue(timeLineThreeObjects);
+            StartCoroutine(Wait());
+            timeLines[scenario].SetActive(true);
+            //timeLines[scenario].SetActive(true);
+            // return;
+        }
+        if (scenario == 3)
+        {
             FlipCardScenario();
             //timeLines[scenario].SetActive(true);
             // return;
         }
-        
+
         scenario++;
     }
     void SetListEqualToTrue(List<GameObject> temp)
@@ -132,6 +155,13 @@ public class GameController : MonoBehaviour
         foreach(GameObject g in temp)
         {
             g.SetActive(true);
+        }
+    }
+    void SetListEqualToFalse(List<GameObject> temp)
+    {
+        foreach (GameObject g in temp)
+        {
+            g.SetActive(false);
         }
     }
     void DebugText()
@@ -145,7 +175,7 @@ public class GameController : MonoBehaviour
         text.gameObject.SetActive(true);
         image.gameObject.SetActive(true);
         text.text = "Flip a card and place it on the area";
-        for (int i = 0; i < timeLineTwoObjects.Length; i++)
+        for (int i = 0; i < timeLineTwoObjects.Count; i++)
         {
             timeLineTwoObjects[i].SetActive(true);
         }
@@ -218,7 +248,6 @@ public class GameController : MonoBehaviour
         //canvasRect.SetActive(true);
         text.text = "Now you must answer the questions!";
     }
-
     IEnumerator Wait()
     {
         isDone = true;
