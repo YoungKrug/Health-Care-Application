@@ -1085,7 +1085,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &353452509
 Transform:
   m_ObjectHideFlags: 0
@@ -1608,6 +1608,8 @@ PlayableDirector:
     value: {fileID: 1138512678}
   - key: {fileID: -7239952335857593550, guid: 315b82034c36e56439d973c6c5f82f81, type: 2}
     value: {fileID: 1138512678}
+  - key: {fileID: 7651019429060802088, guid: 315b82034c36e56439d973c6c5f82f81, type: 2}
+    value: {fileID: 1110971292}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &737527665
@@ -2416,6 +2418,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a471aa19f57db64c9abb500eb1f9d02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1110971292 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 40f70bd252488024a89dddf5ba3a09ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 1997749944}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1110971293 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 40f70bd252488024a89dddf5ba3a09ea,
@@ -2793,7 +2801,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!320 &1276494216
 PlayableDirector:
   m_ObjectHideFlags: 0
