@@ -9,6 +9,8 @@ using UnityEngine.Playables;
 public class GameController : MonoBehaviour
 {
     // Start is called before the first frame update
+    public GameObject introStuff;
+    public Text introText;
     [HideInInspector]
     public List<GameObject> playArea;
     public List<GameObject> timeLines;
@@ -33,10 +35,11 @@ public class GameController : MonoBehaviour
     bool isDoingFirstScenario = false;
     bool cardHasBeenPlaced;
     bool isDone;
+    bool hasTriggered = false;
     // Since we are not doing the card flip we need to change up how we say it
     void Awake()
     {
-       
+
         image.gameObject.SetActive(false);
         text.gameObject.SetActive(false);
         button.gameObject.SetActive(false);
@@ -56,17 +59,18 @@ public class GameController : MonoBehaviour
         if (!isWaitingForPlayerInput && !isDone)
         {
             isDoingFirstScenario = true;
-            if(scenario == 3 && !isQuestionTime) // continue
+            if (scenario == 3 && !isQuestionTime && !hasTriggered) // continue
             {
-                CardHasBeenPlaced();
+                CardPlacedActivity();
+                hasTriggered = true;
             }
-            if(scenario != 3)
+            if (scenario != 3)
                 HandleScenarioInformation();
         }
         //We know the player has given input, but we have to ensure he wants to use this location
         // int touches = 0;      
-        
-        if(isWaitingForPlayerInput && numberOfTouches> 0 && placer.GetComponent<DefaultTrackableEventHandler>().checkIfTracking)
+
+        if (isWaitingForPlayerInput && numberOfTouches > 0 && placer.GetComponent<DefaultTrackableEventHandler>().checkIfTracking)
             CheckIfObjectHasBeenPlaced();
         DebugText();
         numberOfTouches += Input.touches.Length;
@@ -106,6 +110,8 @@ public class GameController : MonoBehaviour
             button.gameObject.SetActive(true);
             text.gameObject.SetActive(true);
             image.gameObject.SetActive(true);
+            introText.gameObject.SetActive(false);
+            introStuff.SetActive(false);
         }
     }
     //When someone clicks the button we have the player input
@@ -116,13 +122,13 @@ public class GameController : MonoBehaviour
     void PlayScenario()
     {
         //Plays the timeline squences
-        if(scenario < 1)
+        if (scenario < 1)
         {
             SetListEqualToTrue(timeLineOneObjects);
             StartCoroutine(Wait());
             timeLines[scenario].SetActive(true);
         }
-        if(scenario == 1)
+        if (scenario == 1)
         {
             SetListEqualToFalse(timeLineOneObjects);
             SetListEqualToTrue(timeLineTwoObjects);
@@ -138,6 +144,7 @@ public class GameController : MonoBehaviour
             SetListEqualToTrue(timeLineThreeObjects);
             StartCoroutine(Wait());
             timeLines[scenario].SetActive(true);
+
             //timeLines[scenario].SetActive(true);
             // return;
         }
@@ -152,7 +159,7 @@ public class GameController : MonoBehaviour
     }
     void SetListEqualToTrue(List<GameObject> temp)
     {
-        foreach(GameObject g in temp)
+        foreach (GameObject g in temp)
         {
             g.SetActive(true);
         }
@@ -185,7 +192,7 @@ public class GameController : MonoBehaviour
     {
 
         GameObject[] characters = GameObject.FindGameObjectsWithTag("Cards");
-        
+
         if (currentCard == null) // if card has not been placed
         {
             foreach (GameObject g in characters)
@@ -201,7 +208,7 @@ public class GameController : MonoBehaviour
                 }
             }
         }
-        else if(currentCard != null)
+        else if (currentCard != null)
         {
             CardPlacedActivity();
 
@@ -210,23 +217,16 @@ public class GameController : MonoBehaviour
     public bool isWaitingTwo;
     void CardPlacedActivity()
     {
-       
-        if (currentCard)
-        {
-            if (!isWaitingTwo)
-            {
-                text.gameObject.SetActive(true);
-                image.gameObject.SetActive(true);
-                exerciseComplete.gameObject.SetActive(true);
-                // canvasRect.SetActive(true);
-                text.text = "Once you are done with the exercise press the buttons";
-                GameObject[] temp = new GameObject[3];
-                temp[0] = text.gameObject;
-                temp[1] = image.gameObject;
-                StartCoroutine(TurnOff(10f, temp, isWaitingTwo));
-                isWaitingTwo = true;
-            }
-        }
+        text.gameObject.SetActive(true);
+        image.gameObject.SetActive(true);
+        exerciseComplete.gameObject.SetActive(true);
+        // canvasRect.SetActive(true);
+        text.text = "Once you are done with the exercise press the buttons";
+        GameObject[] temp = new GameObject[3];
+        temp[0] = text.gameObject;
+        temp[1] = image.gameObject;
+        StartCoroutine(TurnOff(20f, temp, isWaitingTwo));
+        isWaitingTwo = true;
     }
     public bool isWaiting = false;
     public bool isQuestionTime = false;
@@ -242,11 +242,12 @@ public class GameController : MonoBehaviour
             temp[0] = text.gameObject;
             temp[1] = image.gameObject;
             temp[2] = exerciseComplete.gameObject;
-            StartCoroutine(TurnOff(4f, temp,isWaiting));
+            StartCoroutine(TurnOff(4f, temp, isWaiting));
             isWaiting = true;
         }
         //canvasRect.SetActive(true);
-        text.text = "Now you must answer the questions!";
+        text.text = "Done";
+        //For reference
     }
     IEnumerator Wait()
     {
@@ -261,7 +262,7 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(time);
         for (int i = 0; i < temp.Length; i++)
         {
-            if(temp[i] != null)
+            if (temp[i] != null)
                 temp[i].SetActive(false);
         }
     }
