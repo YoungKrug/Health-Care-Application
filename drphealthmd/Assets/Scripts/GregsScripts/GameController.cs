@@ -19,6 +19,7 @@ public class GameController : MonoBehaviour
     public List<GameObject> timeLineThreeObjects; // Code for a way to make this all work after a certain prereq has be fullfilled
     public List<GameObject> timeLineFourObjects;
     public List<GameObject> timeLineFiveObjects;
+    public GameObject recordCanvas;
     public GameObject placer;
     public GameObject planeFinder;
     public GameObject objectToSpawnOnCard;
@@ -28,6 +29,8 @@ public class GameController : MonoBehaviour
     public Button button;
     public Button exerciseComplete;
     public Text text;
+    public GameObject playerOneObj;
+    public GameObject playerTwoObj;
     public Text debug;
     public bool isWaitingForPlayerInput = true;
     int numberOfTouches = 0;
@@ -36,6 +39,7 @@ public class GameController : MonoBehaviour
     bool cardHasBeenPlaced;
     bool isDone;
     bool hasTriggered = false;
+    bool isWaitingForCourotine;
     // Since we are not doing the card flip we need to change up how we say it
     void Awake()
     {
@@ -61,10 +65,10 @@ public class GameController : MonoBehaviour
             isDoingFirstScenario = true;
             if (scenario == 3 && !isQuestionTime && !hasTriggered) // continue
             {
-                CardPlacedActivity();
+                HandleScenarioInformation();
                 hasTriggered = true;
             }
-            if (scenario != 3)
+            if (scenario != 3 && !hasTriggered)
                 HandleScenarioInformation();
         }
         //We know the player has given input, but we have to ensure he wants to use this location
@@ -143,14 +147,15 @@ public class GameController : MonoBehaviour
             SetListEqualToFalse(timeLineTwoObjects);
             SetListEqualToTrue(timeLineThreeObjects);
             StartCoroutine(Wait());
-            timeLines[scenario].SetActive(true);
+            timeLines[scenario].SetActive(true);            
 
             //timeLines[scenario].SetActive(true);
             // return;
         }
         if (scenario == 3)
         {
-            FlipCardScenario();
+            playerOneObj.SetActive(true);
+            recordCanvas.SetActive(true);
             //timeLines[scenario].SetActive(true);
             // return;
         }
@@ -215,6 +220,11 @@ public class GameController : MonoBehaviour
         }
     }
     public bool isWaitingTwo;
+    public void DoesPlayerTwoHaveThePhone()
+    {
+        playerOneObj.SetActive(false);
+        CardPlacedActivity();
+    }
     void CardPlacedActivity()
     {
         text.gameObject.SetActive(true);
