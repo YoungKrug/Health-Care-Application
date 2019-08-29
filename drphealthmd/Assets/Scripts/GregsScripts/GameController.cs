@@ -33,6 +33,7 @@ public class GameController : MonoBehaviour
     public GameObject playerTwoObj;
     public Text debug;
     public bool isWaitingForPlayerInput = true;
+    public GameObject characterSelectionCanvas;
     int numberOfTouches = 0;
     int scenario = 0;
     bool isDoingFirstScenario = false;
@@ -40,10 +41,10 @@ public class GameController : MonoBehaviour
     bool isDone;
     bool hasTriggered = false;
     bool isWaitingForCourotine;
+    bool canContinue = false;
     // Since we are not doing the card flip we need to change up how we say it
     void Awake()
     {
-
         image.gameObject.SetActive(false);
         text.gameObject.SetActive(false);
         button.gameObject.SetActive(false);
@@ -62,6 +63,10 @@ public class GameController : MonoBehaviour
         //Before we continue forward we have to make sure the scene is done.. This will be changed to the festival scene
         if (!isWaitingForPlayerInput && !isDone)
         {
+            if(scenario == 1)
+            {
+                characterSelectionCanvas.SetActive(true);
+            }
             isDoingFirstScenario = true;
             if (scenario == 3 && !isQuestionTime && !hasTriggered) // continue
             {
@@ -69,7 +74,14 @@ public class GameController : MonoBehaviour
                 hasTriggered = true;
             }
             if (scenario != 3 && !hasTriggered)
-                HandleScenarioInformation();
+            {
+               if(isDone && scenario == 1 && canContinue)
+               {
+                    HandleScenarioInformation();
+               }
+               else if(scenario != 1)
+                    HandleScenarioInformation();
+            }
         }
         //We know the player has given input, but we have to ensure he wants to use this location
         // int touches = 0;      
@@ -117,6 +129,11 @@ public class GameController : MonoBehaviour
             introText.gameObject.SetActive(false);
             introStuff.SetActive(false);
         }
+    }
+    public void CanContinue()
+    {
+        canContinue = true;
+        characterSelectionCanvas.SetActive(false);
     }
     //When someone clicks the button we have the player input
     public void SetIsWaitingForPlayerInput()
