@@ -244,12 +244,16 @@ PlayableDirector:
   m_SceneBindings:
   - key: {fileID: 653859699009362000, guid: a111e2732a2bc974b81009605f1bfc2c, type: 2}
     value: {fileID: 297155022}
-  - key: {fileID: 7074048889116370767, guid: a111e2732a2bc974b81009605f1bfc2c, type: 2}
-    value: {fileID: 297155022}
   - key: {fileID: -2713069405652644590, guid: a111e2732a2bc974b81009605f1bfc2c, type: 2}
     value: {fileID: 1891115340}
   - key: {fileID: 2706421044662255660, guid: a111e2732a2bc974b81009605f1bfc2c, type: 2}
     value: {fileID: 1891115340}
+  - key: {fileID: 543131686611569026, guid: a111e2732a2bc974b81009605f1bfc2c, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 884409180882503880, guid: a111e2732a2bc974b81009605f1bfc2c, type: 2}
+    value: {fileID: 297155022}
+  - key: {fileID: 2971532632411511954, guid: a111e2732a2bc974b81009605f1bfc2c, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1276494217
@@ -331,6 +335,31 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: b67211499d4cad5448a43b3b552d3b36,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4036766138179359327, guid: b67211499d4cad5448a43b3b552d3b36,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4036766138179359327, guid: b67211499d4cad5448a43b3b552d3b36,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.10398158
+      objectReference: {fileID: 0}
+    - target: {fileID: -4036766138179359327, guid: b67211499d4cad5448a43b3b552d3b36,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99457926
+      objectReference: {fileID: 0}
+    - target: {fileID: -4036766138179359327, guid: b67211499d4cad5448a43b3b552d3b36,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -6.2170005
+      objectReference: {fileID: 0}
+    - target: {fileID: -4036766138179359327, guid: b67211499d4cad5448a43b3b552d3b36,
+        type: 3}
+      propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
