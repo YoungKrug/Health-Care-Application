@@ -34,6 +34,7 @@ public class GameController : MonoBehaviour
     public Text debug;
     public bool isWaitingForPlayerInput = true;
     public GameObject characterSelectionCanvas;
+    public GameObject characters;
     int numberOfTouches = 0;
     int scenario = 0;
     bool isDoingFirstScenario = false;
@@ -66,6 +67,7 @@ public class GameController : MonoBehaviour
             if(scenario == 1)
             {
                 characterSelectionCanvas.SetActive(true);
+                characters.SetActive(true);
             }
             isDoingFirstScenario = true;
             if (scenario == 3 && !isQuestionTime && !hasTriggered) // continue
@@ -75,10 +77,12 @@ public class GameController : MonoBehaviour
             }
             if (scenario != 3 && !hasTriggered)
             {
-               if(isDone && scenario == 1 && canContinue)
+               if(scenario == 1 && canContinue)
                {
                     HandleScenarioInformation();
-               }
+                    characterSelectionCanvas.SetActive(false);
+                    characters.SetActive(false);
+                }
                else if(scenario != 1)
                     HandleScenarioInformation();
             }
@@ -134,6 +138,8 @@ public class GameController : MonoBehaviour
     {
         canContinue = true;
         characterSelectionCanvas.SetActive(false);
+      //  scenario++;
+       // HandleScenarioInformation();
     }
     //When someone clicks the button we have the player input
     public void SetIsWaitingForPlayerInput()
@@ -148,6 +154,7 @@ public class GameController : MonoBehaviour
             SetListEqualToTrue(timeLineOneObjects);
             StartCoroutine(Wait());
             timeLines[scenario].SetActive(true);
+            //introStuff.SetActive(false);
         }
         if (scenario == 1)
         {
