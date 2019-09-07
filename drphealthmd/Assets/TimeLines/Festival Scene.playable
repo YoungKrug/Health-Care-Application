@@ -1026,7 +1026,7 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: scene1 MP clip 2
   - m_Version: 1
-    m_Start: 11.05
+    m_Start: 11.183333333333334
     m_ClipIn: 0
     m_Asset: {fileID: -1117545023706086187}
     m_Duration: 1.6799999999999997

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using UnityEditor;
@@ -24,4 +24,4 @@ public class ExcemptFromEncryption : IPostprocessBuildWithReport {
             File.WriteAllText(plistPath, plist.WriteToString());
         }
     }
-}
+}*/

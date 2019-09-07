@@ -202,8 +202,8 @@ public class GameController : MonoBehaviour
     }
     void DebugText()
     {
-        debug.text = placer.GetComponent<DefaultTrackableEventHandler>().checkIfTracking.ToString() + '\n' + Input.touchCount.ToString() + "  " + "\n Number of touches: " + numberOfTouches +
-            "\n" + isWaitingForPlayerInput;
+       /// debug.text = placer.GetComponent<DefaultTrackableEventHandler>().checkIfTracking.ToString() + '\n' + Input.touchCount.ToString() + "  " + "\n Number of touches: " + numberOfTouches +
+        //    "\n" + isWaitingForPlayerInput;
     }
     public void FlipCardScenario()
     {
