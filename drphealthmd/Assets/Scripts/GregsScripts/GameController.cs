@@ -35,6 +35,7 @@ public class GameController : MonoBehaviour
     public bool isWaitingForPlayerInput = true;
     public GameObject characterSelectionCanvas;
     public GameObject characters;
+    public bool hasFinished;
     int numberOfTouches = 0;
     int scenario = 0;
     bool isDoingFirstScenario = false;
@@ -244,11 +245,13 @@ public class GameController : MonoBehaviour
         }
     }
     public bool isWaitingTwo;
+    //Switches to player two
     public void DoesPlayerTwoHaveThePhone()
     {
         playerOneObj.SetActive(false);
         CardPlacedActivity();
     }
+    //Obsolete 
     void CardPlacedActivity()
     {
         text.gameObject.SetActive(true);
@@ -264,6 +267,7 @@ public class GameController : MonoBehaviour
     }
     public bool isWaiting = false;
     public bool isQuestionTime = false;
+    //Obsolete
     public void HasFinishedExercise()
     {
         isQuestionTime = true;
@@ -283,11 +287,23 @@ public class GameController : MonoBehaviour
         text.text = "Done";
         //For reference
     }
-    IEnumerator Wait()
+    //To skip through different scenarios;
+    public void SkipScenario()
+    {
+        isDone = false;
+        StopCoroutine(Wait());
+    }
+    public void ReplayScenario()
+    {
+        isDone = false;
+        StopCoroutine(Wait());
+        scenario -= 2; // We need to go back two scenarios since we play scenarios in a preloop it has added after we called the function not after the timeline.
+    }
+    IEnumerator Wait() // This function waits for the scenarios to be done. Ima modify it a bit
     {
         isDone = true;
         float time = (float)timeLines[scenario].GetComponent<PlayableDirector>().duration + 2f;
-        yield return new WaitForSeconds(time);
+        yield return new WaitUntil(() => timeLines[scenario].GetComponent<PlayableDirector>().state != PlayState.Playing);
         isDone = false;
     }
     IEnumerator TurnOff(float time, GameObject[] temp, bool wait)
