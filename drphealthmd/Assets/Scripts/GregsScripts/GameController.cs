@@ -62,6 +62,7 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(timeLines[scenario - 1].GetComponent<PlayableDirector>().time);
         //Before we continue forward we have to make sure the scene is done.. This will be changed to the festival scene
         if (!isWaitingForPlayerInput && !isDone)
         {
@@ -302,8 +303,9 @@ public class GameController : MonoBehaviour
     IEnumerator Wait() // This function waits for the scenarios to be done. Ima modify it a bit
     {
         isDone = true;
-        float time = (float)timeLines[scenario].GetComponent<PlayableDirector>().duration + 2f;
-        yield return new WaitUntil(() => timeLines[scenario].GetComponent<PlayableDirector>().state != PlayState.Playing);
+        float time = (float)timeLines[scenario].GetComponent<PlayableDirector>().duration;
+        PlayableDirector dir = timeLines[scenario].GetComponent<PlayableDirector>();
+        yield return new WaitUntil(() => dir.time >= time - 0.05f);
         isDone = false;
     }
     IEnumerator TurnOff(float time, GameObject[] temp, bool wait)
