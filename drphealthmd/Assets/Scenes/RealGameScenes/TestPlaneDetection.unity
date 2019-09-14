@@ -3654,6 +3654,7 @@ GameObject:
   m_Component:
   - component: {fileID: 563856518}
   - component: {fileID: 563856517}
+  - component: {fileID: 563856519}
   m_Layer: 0
   m_Name: HeraldGetsStolenWorking
   m_TagString: Untagged
@@ -3672,7 +3673,7 @@ PlayableDirector:
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: 3f594f0acefa24f45808d34ecbd2df4b, type: 2}
   m_InitialState: 1
-  m_WrapMode: 2
+  m_WrapMode: 0
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
@@ -3762,6 +3763,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &563856519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563856516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f12106b6aa6dcc41ac2cee9854e3e7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &572743200
 GameObject:
   m_ObjectHideFlags: 0
@@ -5693,6 +5706,7 @@ GameObject:
   m_Component:
   - component: {fileID: 865763264}
   - component: {fileID: 865763263}
+  - component: {fileID: 865763265}
   m_Layer: 0
   m_Name: TimeLineWithGranny
   m_TagString: Untagged
@@ -5711,7 +5725,7 @@ PlayableDirector:
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: 46f5b15890b593343ab8b40675fb8af4, type: 2}
   m_InitialState: 1
-  m_WrapMode: 2
+  m_WrapMode: 0
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
@@ -5768,6 +5782,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &865763265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 865763262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f12106b6aa6dcc41ac2cee9854e3e7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &889804377 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8917145840560120199, guid: db8eb1cb9713151488c76d707cafb54e,
@@ -7746,6 +7772,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1276494217}
   - component: {fileID: 1276494216}
+  - component: {fileID: 1276494218}
   m_Layer: 0
   m_Name: FestivalScene
   m_TagString: Untagged
@@ -7764,7 +7791,7 @@ PlayableDirector:
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: a111e2732a2bc974b81009605f1bfc2c, type: 2}
   m_InitialState: 1
-  m_WrapMode: 2
+  m_WrapMode: 0
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
@@ -7798,6 +7825,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1276494218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276494215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f12106b6aa6dcc41ac2cee9854e3e7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1278520951
 GameObject:
   m_ObjectHideFlags: 0
@@ -8136,6 +8175,7 @@ MonoBehaviour:
   isWaitingForPlayerInput: 1
   characterSelectionCanvas: {fileID: 123464984}
   characters: {fileID: 786282548}
+  hasFinished: 0
   isWaitingTwo: 0
   isWaiting: 0
   isQuestionTime: 0
