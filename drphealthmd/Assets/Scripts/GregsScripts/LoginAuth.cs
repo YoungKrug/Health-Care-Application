@@ -21,12 +21,15 @@ public class LoginAuth : MonoBehaviour
     private UnityEngine.Random random = new UnityEngine.Random();
     DatabaseReference databaseReference;
     User[] currentUsers;
+    public Text text;
     // Start is called before the first frame update
     void Start()
     {
         //Connects to the database
         FirebaseAuth.DefaultInstance.App.SetEditorDatabaseUrl("https://go-health-kids.firebaseio.com/");
-        databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
+       // FirebaseAuth.DefaultInstance.
+        Firebase.Auth.FirebaseAuth auth = FirebaseAuth.DefaultInstance;
+        databaseReference = FirebaseDatabase.DefaultInstance.GetReferenceFromUrl("https://go-health-kids.firebaseio.com/");
         GetInformation();
 
     }
@@ -81,7 +84,7 @@ public class LoginAuth : MonoBehaviour
             //Move on to the next screen
             databaseReference.Database.GoOffline();
             loginDataBaseHolder.GetComponent<LoginInformation>().AddToLoginInformation(userName.text, password.GetComponentInParent<InputField>().text);
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(2);
         }
         usernameWarning.GetComponentInParent<InputField>().text = "Information does not match or it is wrong";
     }

@@ -18,6 +18,7 @@ using Vuforia;
 public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandler
 {
     public bool checkIfTracking = false;
+    public bool alreadyPlaced;
     #region PROTECTED_MEMBER_VARIABLES
 
     protected TrackableBehaviour mTrackableBehaviour;
@@ -110,7 +111,7 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
 
     protected virtual void OnTrackingLost()
     {
-        if (mTrackableBehaviour)
+        if (mTrackableBehaviour && !alreadyPlaced)
         {
             checkIfTracking = false;
             var rendererComponents = mTrackableBehaviour.GetComponentsInChildren<Renderer>(true);

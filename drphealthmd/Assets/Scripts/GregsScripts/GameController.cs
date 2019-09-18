@@ -35,6 +35,7 @@ public class GameController : MonoBehaviour
     public bool isWaitingForPlayerInput = true;
     public GameObject characterSelectionCanvas;
     public GameObject characters;
+    public GameObject replayCanvas;
     public bool hasFinished;
     int numberOfTouches = 0;
     int scenario = 0;
@@ -66,6 +67,10 @@ public class GameController : MonoBehaviour
         //Before we continue forward we have to make sure the scene is done.. This will be changed to the festival scene
         if (!isWaitingForPlayerInput && !isDone)
         {
+            if(!placer.GetComponent<DefaultTrackableEventHandler>().alreadyPlaced)
+                placer.GetComponent<DefaultTrackableEventHandler>().alreadyPlaced = true;
+            if (!replayCanvas.activeInHierarchy)
+                replayCanvas.SetActive(true);
             if(scenario == 1)
             {
                 characterSelectionCanvas.SetActive(true);
@@ -150,30 +155,40 @@ public class GameController : MonoBehaviour
     }
     void PlayScenario()
     {
+        RewindFunctionsForTimeline timeline = GameObject.Find("TimelineController").GetComponent<RewindFunctionsForTimeline>();
+        
         //Plays the timeline squences
         if (scenario < 1)
         {
+            SetListEqualToFalse(timeLineTwoObjects);
+            SetListEqualToFalse(timeLineThreeObjects);
             SetListEqualToTrue(timeLineOneObjects);
             StartCoroutine(Wait());
             timeLines[scenario].SetActive(true);
+            timeLines[scenario + 1].SetActive(false);
+            timeLines[timeLines.Count - 1].SetActive(false);
             //introStuff.SetActive(false);
         }
         if (scenario == 1)
         {
             SetListEqualToFalse(timeLineOneObjects);
+            SetListEqualToFalse(timeLineThreeObjects);
             SetListEqualToTrue(timeLineTwoObjects);
             StartCoroutine(Wait());
-            timeLines[scenario - 1].SetActive(true);
+            timeLines[scenario - 1].SetActive(false);
             timeLines[scenario].SetActive(true);
+            timeLines[scenario + 1].SetActive(false);
             //timeLines[scenario].SetActive(true);
             // return;
         }
         if (scenario == 2)
         {
+            SetListEqualToFalse(timeLineOneObjects);
             SetListEqualToFalse(timeLineTwoObjects);
             SetListEqualToTrue(timeLineThreeObjects);
             StartCoroutine(Wait());
-            timeLines[scenario].SetActive(true);            
+            timeLines[scenario].SetActive(true);
+            timeLines[scenario - 1].SetActive(false);
 
             //timeLines[scenario].SetActive(true);
             // return;
@@ -185,7 +200,7 @@ public class GameController : MonoBehaviour
             //timeLines[scenario].SetActive(true);
             // return;
         }
-
+        timeline.GetTimelineInfo(scenario);
         scenario++;
     }
     void SetListEqualToTrue(List<GameObject> temp)
@@ -204,6 +219,7 @@ public class GameController : MonoBehaviour
     }
     void DebugText()
     {
+       // debug.text = placer.GetComponent<DefaultTrackableEventHandler>().alreadyPlaced.ToString();
        /// debug.text = placer.GetComponent<DefaultTrackableEventHandler>().checkIfTracking.ToString() + '\n' + Input.touchCount.ToString() + "  " + "\n Number of touches: " + numberOfTouches +
         //    "\n" + isWaitingForPlayerInput;
     }
@@ -289,16 +305,45 @@ public class GameController : MonoBehaviour
         //For reference
     }
     //To skip through different scenarios;
-    public void SkipScenario()
+    public void SkipToNextScenario()
     {
-        isDone = false;
-        StopCoroutine(Wait());
+        if (scenario < 3)
+        {
+            isDone = false;
+            PlayableDirector dir = timeLines[scenario].GetComponent<PlayableDirector>();
+            dir.time = 0f;
+            dir.Evaluate();
+            StopCoroutine(Wait());
+            Debug.Log(scenario);
+        }
+        else
+            Debug.Log("Cannot skip ahead");
     }
-    public void ReplayScenario()
+    public void RewindBackScenario()
     {
-        isDone = false;
-        StopCoroutine(Wait());
-        scenario -= 2; // We need to go back two scenarios since we play scenarios in a preloop it has added after we called the function not after the timeline.
+        if (scenario > 1)
+        {
+            PlayableDirector dir;
+            if (scenario >= 3)
+            {
+                scenario = 3;
+                dir = timeLines[timeLines.Count - 1].GetComponent<PlayableDirector>();
+                hasTriggered = false;
+            }
+            else
+            {
+                dir = timeLines[scenario].GetComponent<PlayableDirector>();
+                hasTriggered = false;
+            }
+            dir.time = 0f;
+            dir.Evaluate();
+            isDone = false;
+            StopCoroutine(Wait());
+            scenario -= 2;
+        }
+        else
+            Debug.Log("Cannot go to far back");
+                // We need to go back two scenarios since we play scenarios in a preloop it has added after we called the function not after the timeline.
     }
     IEnumerator Wait() // This function waits for the scenarios to be done. Ima modify it a bit
     {

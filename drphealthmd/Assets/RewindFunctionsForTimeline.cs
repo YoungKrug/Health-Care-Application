@@ -30,6 +30,7 @@ public class RewindFunctionsForTimeline : MonoBehaviour
     {
         paused = false;
         Time.timeScale = 1f;
+        Debug.Log(currentPlayable);
         PlayableDirector temp = playables[currentPlayable];
         float timeToRewind = (Time.deltaTime * speed);
 
@@ -41,6 +42,10 @@ public class RewindFunctionsForTimeline : MonoBehaviour
         else
             Play();
         temp.Evaluate();
+    }
+    public void GetTimelineInfo(int directorNum)
+    {
+        currentPlayable = directorNum;
     }
     public void Rewind()
     {

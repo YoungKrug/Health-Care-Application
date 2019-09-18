@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DelayedIntro : MonoBehaviour
 {
@@ -28,9 +29,10 @@ public class DelayedIntro : MonoBehaviour
 
     public void Appear()
     {
-        Char1.SetActive(true);
-        Char2.SetActive(true);
-        Start.SetActive(true);
-        loading.SetActive(false);
+        // Char1.SetActive(true);
+        //Char2.SetActive(true);
+        //Start.SetActive(true);
+        //loading.SetActive(false);
+        SceneManager.LoadScene(1);
     }
 }

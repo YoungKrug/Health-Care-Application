@@ -29,13 +29,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Info.unity
     guid: 4c9ccc47d2b4b234fa4a15cc55b56333
-  - enabled: 1
-    path: Assets/Scenes/RealGameScenes/TestPlaneDetection.unity
-    guid: 3be58acb645bb2d40882b9e21ee67134
   - enabled: 0
     path: Assets/Scenes/RealGameScenes/Intro 1.unity
     guid: e5d2d41746556f3448d2e2bef71af2fd
   - enabled: 0
     path: Assets/Scenes/RealGameScenes/Login.unity
     guid: b5a546c6881a44f48b80bd20fd1ea20c
+  - enabled: 1
+    path: Assets/Scenes/RealGameScenes/TestPlaneDetection.unity
+    guid: 3be58acb645bb2d40882b9e21ee67134
   m_configObjects: {}
