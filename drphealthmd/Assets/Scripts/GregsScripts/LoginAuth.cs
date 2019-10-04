@@ -22,14 +22,35 @@ public class LoginAuth : MonoBehaviour
     DatabaseReference databaseReference;
     User[] currentUsers;
     public Text text;
+    DependencyStatus dependencyStatus = DependencyStatus.UnavailableOther;
     // Start is called before the first frame update
     void Start()
     {
+        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => {
+            dependencyStatus = task.Result;
+            if (dependencyStatus == DependencyStatus.Available)
+            {
+                InitializeFirebase();
+            }
+            else
+            {
+                Debug.LogError(
+                  "Could not resolve all Firebase dependencies: " + dependencyStatus);
+            }
+        });
+       
+    }
+    void InitializeFirebase()
+    {
         //Connects to the database
         FirebaseAuth.DefaultInstance.App.SetEditorDatabaseUrl("https://go-health-kids.firebaseio.com/");
-       // FirebaseAuth.DefaultInstance.
-        Firebase.Auth.FirebaseAuth auth = FirebaseAuth.DefaultInstance;
+        // FirebaseAuth.DefaultInstance.
+        FirebaseApp app = FirebaseApp.DefaultInstance;
+        app.SetEditorDatabaseUrl("https://go-health-kids.firebaseio.com/");
         databaseReference = FirebaseDatabase.DefaultInstance.GetReferenceFromUrl("https://go-health-kids.firebaseio.com/");
+        if (app.Options.DatabaseUrl != null) 
+            app.SetEditorDatabaseUrl(app.Options.DatabaseUrl);
+        databaseReference.Database.GoOnline();
         GetInformation();
 
     }
