@@ -29,7 +29,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Info.unity
     guid: 4c9ccc47d2b4b234fa4a15cc55b56333
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/RealGameScenes/Intro 1.unity
     guid: e5d2d41746556f3448d2e2bef71af2fd
   - enabled: 1

@@ -22,30 +22,38 @@ public class LoginAuth : MonoBehaviour
     DatabaseReference databaseReference;
     User[] currentUsers;
     public Text text;
-    DependencyStatus dependencyStatus = DependencyStatus.UnavailableOther;
+    FirebaseApp app;
     // Start is called before the first frame update
     void Start()
     {
-        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => {
-            dependencyStatus = task.Result;
-            if (dependencyStatus == DependencyStatus.Available)
+        Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => {
+            var dependencyStatus = task.Result;
+            if (dependencyStatus == Firebase.DependencyStatus.Available)
             {
-                InitializeFirebase();
+                // Create and hold a reference to your FirebaseApp,
+                // where app is a Firebase.FirebaseApp property of your application class.
+                  app = Firebase.FirebaseApp.DefaultInstance;
+                InitializeFirebase(app);
+                // Set a flag here to indicate whether Firebase is ready to use by your app.
             }
             else
             {
-                Debug.LogError(
-                  "Could not resolve all Firebase dependencies: " + dependencyStatus);
+                UnityEngine.Debug.LogError(System.String.Format(
+                  "Could not resolve all Firebase dependencies: {0}", dependencyStatus));
+                // Firebase Unity SDK is not safe to use here.
             }
         });
-       
+
     }
-    void InitializeFirebase()
+    void InitializeFirebase(FirebaseApp app)
     {
+        // Google
+        FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://go-health-kids.firebaseio.com/");
+        //Google says:
         //Connects to the database
         FirebaseAuth.DefaultInstance.App.SetEditorDatabaseUrl("https://go-health-kids.firebaseio.com/");
         // FirebaseAuth.DefaultInstance.
-        FirebaseApp app = FirebaseApp.DefaultInstance;
+        // app = FirebaseApp.DefaultInstance;
         app.SetEditorDatabaseUrl("https://go-health-kids.firebaseio.com/");
         databaseReference = FirebaseDatabase.DefaultInstance.GetReferenceFromUrl("https://go-health-kids.firebaseio.com/");
         if (app.Options.DatabaseUrl != null) 
