@@ -2461,6 +2461,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a471aa19f57db64c9abb500eb1f9d02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &392468369 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 40f70bd252488024a89dddf5ba3a09ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 56497065}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &398487244
 GameObject:
   m_ObjectHideFlags: 0
@@ -3657,7 +3663,7 @@ GameObject:
   - component: {fileID: 563856517}
   - component: {fileID: 563856519}
   m_Layer: 0
-  m_Name: HeraldGetsStolenWorking
+  m_Name: HeraldGetsStolenWorking_Final
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3748,6 +3754,10 @@ PlayableDirector:
     value: {fileID: 927093583}
   - key: {fileID: -8792162385600752830, guid: 3f594f0acefa24f45808d34ecbd2df4b, type: 2}
     value: {fileID: 0}
+  - key: {fileID: 8666330744884076896, guid: 3f594f0acefa24f45808d34ecbd2df4b, type: 2}
+    value: {fileID: 392468369}
+  - key: {fileID: 4766395696055131858, guid: 3f594f0acefa24f45808d34ecbd2df4b, type: 2}
+    value: {fileID: 1994480756}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &563856518
@@ -5534,7 +5544,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlaneIndicator: {fileID: 1353731089078378, guid: b9ed12c68682d5b49bfa70ee9d71602d,
     type: 3}
-  Height: 1.6
+  Height: 1.5
   OnInteractiveHitTest:
     m_PersistentCalls:
       m_Calls:
@@ -5586,7 +5596,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: Vuforia.AnchorInputListenerBehaviour+InputReceivedEvent, Vuforia.UnityExtensions,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-  mDisplayAdvanced: 0
+  mDisplayAdvanced: 1
 --- !u!4 &833475489
 Transform:
   m_ObjectHideFlags: 0
@@ -5936,7 +5946,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &916072132
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12000,7 +12010,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1843784670
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13021,6 +13031,12 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &1994480756 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 40f70bd252488024a89dddf5ba3a09ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 927093582}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1996891490
 GameObject:
   m_ObjectHideFlags: 0
@@ -13039,7 +13055,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1996891491
 RectTransform:
   m_ObjectHideFlags: 0
