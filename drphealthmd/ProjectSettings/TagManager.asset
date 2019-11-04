@@ -8,6 +8,7 @@ TagManager:
   - Char1
   - Char2
   - Loading
+  - Cards
   layers:
   - Default
   - TransparentFX

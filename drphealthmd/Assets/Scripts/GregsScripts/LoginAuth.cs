@@ -21,12 +21,52 @@ public class LoginAuth : MonoBehaviour
     private UnityEngine.Random random = new UnityEngine.Random();
     DatabaseReference databaseReference;
     User[] currentUsers;
+    public Text text;
+    FirebaseApp app;
+    DependencyStatus dependencyStatus;
     // Start is called before the first frame update
     void Start()
     {
-        //Connects to the database
+        dependencyStatus = FirebaseApp.CheckDependencies();
+        if (dependencyStatus == Firebase.DependencyStatus.Available)
+        {
+            // Create and hold a reference to your FirebaseApp,
+            // where app is a Firebase.FirebaseApp property of your application class.
+            app = Firebase.FirebaseApp.DefaultInstance;
+            InitializeFirebase(app);
+            // Set a flag here to indicate whether Firebase is ready to use by your app.
+        }
+        else
+        {
+            UnityEngine.Debug.LogError(System.String.Format(
+              "Could not resolve all Firebase dependencies: {0}", dependencyStatus));
+            // Firebase Unity SDK is not safe to use here.
+        }
+        //Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
+        //{
+        //    dependencyStatus = task.Result;
+           
+        //});
+      //  Debug.Log(dependencyStatus);
+       //InitializeFirebase(app);
+    }
+    void InitializeFirebase(FirebaseApp app)
+    {
+        // Google
+#if UNITY_EDITOR
+        FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://go-health-kids.firebaseio.com/");
         FirebaseAuth.DefaultInstance.App.SetEditorDatabaseUrl("https://go-health-kids.firebaseio.com/");
-        databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
+       // app.SetEditorDatabaseUrl("https://go-health-kids.firebaseio.com/");
+#else
+        FirebaseApp.DefaultInstance.Options.DatabaseUrl = new System.Uri("https://go-health-kids.firebaseio.com/");
+#endif
+        //FirebaseApp.DefaultInstance.Options.DatabaseUrl = new System.Uri("https://go-health-kids.firebaseio.com/");
+        //Google says:
+        //Connects to the database
+        // FirebaseAuth.DefaultInstance.
+        // app = FirebaseApp.DefaultInstance;
+        databaseReference = FirebaseDatabase.DefaultInstance.GetReferenceFromUrl("https://go-health-kids.firebaseio.com/");
+        databaseReference.Database.GoOnline();
         GetInformation();
 
     }
@@ -42,8 +82,14 @@ public class LoginAuth : MonoBehaviour
             {
                 try
                 {
+                  
                     //Connecting to the database and sending it the new information
-                    databaseReference.Database.GoOnline();
+                    if (databaseReference != null)
+                        databaseReference.Database.GoOnline();
+                    else
+                    {
+                        databaseReference.Database.GetReferenceFromUrl("https://go-health-kids.firebaseio.com/");
+                    }
                     User user = new User(userName.text, retypePassword.GetComponent<InputField>().text);
                     //The unique identifier * Plan to make it an id in the future
                     string key = databaseReference.Child("users").Push().Key;
@@ -68,11 +114,15 @@ public class LoginAuth : MonoBehaviour
                 //Debug.Log("Passwords and retype password must match or the username is already taken");
                 //Warnings to people depending on if there user name info or password info is wrong
                 signUpSuccessful.GetComponentInParent<InputField>().text = "";
-                usernameWarning.GetComponentInParent<InputField>().text = "Username is taken please use a different one";
+                usernameWarning.GetComponentInParent<InputField>().text = "Username is taken";
             }
         }
-        
-       
+        else
+        {
+            signUpSuccessful.GetComponentInParent<InputField>().text = "";
+            usernameWarning.GetComponentInParent<InputField>().text = "Passwords must match";
+        }
+
     }
     public void OnSignIn()
     {
@@ -81,9 +131,10 @@ public class LoginAuth : MonoBehaviour
             //Move on to the next screen
             databaseReference.Database.GoOffline();
             loginDataBaseHolder.GetComponent<LoginInformation>().AddToLoginInformation(userName.text, password.GetComponentInParent<InputField>().text);
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(2);
         }
-        usernameWarning.GetComponentInParent<InputField>().text = "Information does not match or it is wrong";
+        else
+            usernameWarning.GetComponentInParent<InputField>().text = "Information does not match or it is wrong";
     }
     public void GetInformation()
     {

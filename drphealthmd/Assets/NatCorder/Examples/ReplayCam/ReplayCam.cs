@@ -97,9 +97,9 @@ namespace NatCorderU.Examples {
             Debug.Log(NativeGallery.SaveVideoToGallery(path, "Deck Cards", "Deck card " + DateTime.Now.ToString("dd-MM-yyyy_HH:mm:ss") + ".mp4"));
             // Playback the video
             #if UNITY_IOS
-            Handheld.PlayFullScreenMovie("file://" + path);
+            //Handheld.PlayFullScreenMovie("file://" + path);
             #elif UNITY_ANDROID
-            Handheld.PlayFullScreenMovie(path);
+            //Handheld.PlayFullScreenMovie(path);
             #endif
         }
     }
